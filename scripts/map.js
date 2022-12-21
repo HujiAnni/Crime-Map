@@ -4,7 +4,7 @@ var map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/mapbox/dark-v10',
   center: [-73.930618,40.786696],
-  zoom: 11
+  zoom: 12
 });
 
 map.on('load', function() {

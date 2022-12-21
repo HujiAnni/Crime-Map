@@ -17,7 +17,7 @@ var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/dark-v11',
     center: [-73.930618,40.786696],
-    zoom: 11
+    zoom: 12
   });
 
 
@@ -31,7 +31,8 @@ map.on('load', () => {
                 "ofns_desc":crime.ofns_desc,
                 "victim":crime.vic_age_group,
                 "case_status":crime.crm_atpt_cptd_cd,
-                "cat":crime.law_cat_cd},
+                "cat":crime.law_cat_cd,
+                "year":crime.cmplnt_fr_dt.slice(0,4)},
                 
             "geometry":{
                 "type":"Point",
@@ -134,6 +135,7 @@ map.on('load', () => {
     // description HTML from its properties.
     map.on('click', 'unclustered-point', (e) => {
     const coordinates = e.features[0].geometry.coordinates.slice();
+    const year = e.features[0].properties.year;
     const ofns_desc = e.features[0].properties.ofns_desc;
     const victim = e.features[0].properties.victim;
     const status = e.features[0].properties.case_status;
@@ -148,7 +150,7 @@ map.on('load', () => {
     new mapboxgl.Popup()
     .setLngLat(coordinates)
     .setHTML(
-    `The incident ${ofns_desc} happended to a victim in the ${victim} age group. The crime is defined as ${category}. The crime was ${status}.`
+    `In ${year}, this incident ${ofns_desc} happended to a victim in the ${victim} age group. The crime was defined as ${category}. The crime was ${status}.`
     )
     .addTo(map);
     });
