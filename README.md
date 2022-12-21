@@ -1,6 +1,6 @@
 # NYC Crime Map
 
-<img src=".images/crime-map.jpg">
+<img src="./images/crime-map.jpg">
 
 An overview of New York City's historical crime records.
 
