@@ -16,7 +16,7 @@ fetch(url)
 var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/dark-v11',
-    center: [-73.930618,40.786696],
+    center: [-74.0060,40.77128],
     zoom: 12
   });
 
