@@ -10,7 +10,7 @@ Languages:  Javascript, CSS, and HTML
 ## Description
 This Project is a map featuring all valid felony, misdemeanor, and violation crimes reported to the New York City Police Department (NYPD) from 2006 to the end of 2019. 
 
-The data is shown in two forms: Heat Map and by Cluster.
+The map is built and customized with Mapbox API. The data is shown in two forms: Heat Map and by Cluster. 
 
 <br>
 
