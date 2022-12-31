@@ -1,6 +1,6 @@
 # NYC Crime Map
 
-<img src="./images/crime-map.jpg">
+<img src="./images/crime-map.jpg" alt="Intro Image">
 
 An overview of New York City's historical crime records.
 
@@ -15,6 +15,7 @@ The map is built and customized with Mapbox API. The data is shown in two forms:
 <br>
 
 ## Demo
+<img src="./images/demo-crimeMap.gif" alt="Demo GIF">
 
 
 <br>
