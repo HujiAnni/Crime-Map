@@ -35,6 +35,16 @@
           class="collapse navbar-collapse justify-content-end"
           id="navbarNavDropdown"
         >
+          <div
+            class="input-append date"
+            id="datepicker"
+            data-date="02-2012"
+            data-date-format="mm-yyyy"
+          >
+            <input type="text" readonly="readonly" name="date" />
+            <span class="add-on"><i class="icon-th"></i></span>
+          </div>
+
           <ul class="navbar-nav">
             <li class="nav-item">
               <a class="nav-link" aria-current="page" href="heatmap.html"
@@ -54,7 +64,7 @@
       <p>
         This map includes all valid felony, misdemeanor, and violation crimes
         reported to the New York City Police Department (NYPD) from 2006 to the
-        end of 2022. Only fetched 50K records.
+        end of 2022. All records fetched. The map might take a while to load.
       </p>
     </footer>
     <script

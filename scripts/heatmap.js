@@ -10,23 +10,27 @@ var map = new mapboxgl.Map({
 
 // const url = "https://data.cityofnewyork.us/resource/uip8-fykc.json";
 // const url = "https://data.cityofnewyork.us/resource/qgea-i56i.json?$limit=50000"
-const urls = [
-  "https://data.cityofnewyork.us/resource/8h9b-rp9u.json?$limit=50000",
-  "https://data.cityofnewyork.us/resource/8h9b-rp9u.json?$limit=50000&$offset=50000",
-  "https://data.cityofnewyork.us/resource/8h9b-rp9u.json?$limit=50000&$offset=100000",
-];
+// const urls = [];
+// for (let i = 1; i <= 10; i++) {
+//   urls.push(
+//     `https://data.cityofnewyork.us/resource/8h9b-rp9u.json?$limit=${
+//       50000 * i
+//     }&$offset=${50000 * (i - 1)}`
+//   );
+// }
+
+const url =
+  "https://data.cityofnewyork.us/resource/833y-fsy8.json?$limit=50000";
 let nycCrime = [];
 
 // var GeoJSON = require('geojson');
-urls.forEach((url) => {
-  fetch(url)
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      nycCrime = [...data];
-    });
-});
+fetch(url)
+  .then((response) => {
+    return response.json();
+  })
+  .then((data) => {
+    nycCrime.push(...data);
+  });
 
 // fetch(url)
 //   .then((response) => {

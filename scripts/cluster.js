@@ -6,13 +6,16 @@ mapboxgl.accessToken =
 // const url =
 //   "https://data.cityofnewyork.us/resource/qgea-i56i.json?$limit=50000";
 
-const urls = [
-  "https://data.cityofnewyork.us/resource/8h9b-rp9u.json?$limit=50000",
-  "https://data.cityofnewyork.us/resource/8h9b-rp9u.json?$limit=50000&$offset=50000",
-  "https://data.cityofnewyork.us/resource/8h9b-rp9u.json?$limit=50000&$offset=100000",
-];
+// const urls = [];
+// for (let i = 1; i <= 10; i++) {
+//   urls.push(
+//     `https://data.cityofnewyork.us/resource/uip8-fykc.json?$limit=${
+//       50000 * i
+//     }&$offset=${50000 * (i - 1)}`
+//   );
+// }
 
-let nycCrime = [];
+// let nycCrime = [];
 
 // var GeoJSON = require('geojson');
 
@@ -24,15 +27,19 @@ let nycCrime = [];
 //     nycCrime = data;
 //   });
 
-urls.forEach((url) => {
-  fetch(url)
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      nycCrime = [...data];
-    });
-});
+const url =
+  "https://data.cityofnewyork.us/resource/833y-fsy8.json?$limit=50000";
+let nycCrime = [];
+
+// var GeoJSON = require('geojson');
+fetch(url)
+  .then((response) => {
+    return response.json();
+  })
+  .then((data) => {
+    nycCrime = data;
+    // console.log(nycCrime);
+  });
 
 var map = new mapboxgl.Map({
   container: "map",
@@ -48,12 +55,12 @@ map.on("load", () => {
       type: "Feature",
       properties: {
         dbh: 60 * Math.random(),
-        ofns_desc: crime.ofns_desc,
-        victim: crime.vic_age_group,
-        case_status: crime.crm_atpt_cptd_cd,
-        cat: crime.law_cat_cd,
-        // year: crime.cmplnt_fr_dt.slice(0, 4),
-        year: crime.arrest_date.slice(0, 4),
+        victim_age: crime.vic_age_group,
+        victim_sex: crime.vic_sex,
+        victim_race: crime.vic_race,
+        case_status: crime.statistical_murder_flag,
+        boro: crime.boro,
+        year: crime.occur_date.slice(0, 4),
       },
 
       geometry: {
@@ -148,10 +155,11 @@ map.on("load", () => {
   map.on("click", "unclustered-point", (e) => {
     const coordinates = e.features[0].geometry.coordinates.slice();
     const year = e.features[0].properties.year;
-    const ofns_desc = e.features[0].properties.ofns_desc;
-    const victim = e.features[0].properties.victim;
+    const victim_age = e.features[0].properties.victim_age;
+    const victim_sex = e.features[0].properties.victim_sex;
+    const victim_race = e.features[0].properties.victim_race;
     const status = e.features[0].properties.case_status;
-    const category = e.features[0].properties.cat;
+    const boro = e.features[0].properties.boro;
     // Ensure that if the map is zoomed out such that
     // multiple copies of the feature are visible, the
     // popup appears over the copy being pointed to.
@@ -162,7 +170,7 @@ map.on("load", () => {
     new mapboxgl.Popup()
       .setLngLat(coordinates)
       .setHTML(
-        `In ${year}, this incident ${ofns_desc} happended to a victim in the ${victim} age group. The crime was defined as ${category}. The crime was ${status}.`
+        `In ${year}, this shooting incident happended to a ${victim_race} victim (${victim_sex}) in the ${victim_age} age group. The crime was commited in ${boro}.`
       )
       .addTo(map);
   });
